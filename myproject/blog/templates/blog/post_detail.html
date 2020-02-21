@@ -17,4 +17,11 @@
       <p class="article-content">{{ object.content }}</p>
     </div>
   </article>
+  {% if comments %}
+  <article class="media content-section">
+    {% for comment in comments %}
+      {{comment.content}}
+    {% endfor %}
+</article>
+{% endif %}
 {% endblock content %}
