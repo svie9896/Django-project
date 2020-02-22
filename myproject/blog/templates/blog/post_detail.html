@@ -1,5 +1,12 @@
 {% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
+<style>
+  .right {
+    position: absolute;
+    right: 50px;
+  }
+</style>
 <article class="media content-section">
     <img class = "rounded-circle article-img" src = " {{ post.author.profile.image.url }}">
     <div class="media-body">
@@ -17,11 +24,21 @@
       <p class="article-content">{{ object.content }}</p>
     </div>
   </article>
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset class ="form-group">
+        <legend class = "border-bottom mb-4">Comment</legend>
+        {{ form|crispy }}
+    </fieldset>
+    <div class = "form-group">
+        <button class = "btn btn-outline-info" type="submit">Submit comment</button>
+    </div>
+</form>
   {% if comments %}
-  <article class="media content-section">
     {% for comment in comments %}
-      {{comment.content}}
+    <article class="media content-section">
+      {{comment.content}} <p class="right"> By user <a href = "{% url 'user-posts' comment.author.username %}"> {{comment.author}} </a> </p>
+    </article>
     {% endfor %}
-</article>
 {% endif %}
 {% endblock content %}
