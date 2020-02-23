@@ -19,6 +19,7 @@ class Comment(models.Model):
     content = models.TextField()
     Poster = models.ForeignKey(Post,on_delete=models.CASCADE)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
+    date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.content

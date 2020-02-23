@@ -35,11 +35,15 @@ class UserPostListView(ListView):
 
 class PostDisplayView(DetailView): # this is passing the context to the template
     model = Post
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         #dont need to pass all the comments
         #pk refers to the post primary key
-        context['form'] = UserCommentForm()
+        ThePost = Post.objects.get(pk=self.kwargs['pk'])
+        author = self.request.user
+        context['form'] = UserCommentForm(initial = {'Poster':ThePost,
+        'author':author})
         obj = context['object']
         RelComments = Comment.objects.filter(Poster = obj)
         if RelComments:
@@ -51,14 +55,13 @@ class CommentForm(SingleObjectMixin, FormView):
     form_class = UserCommentForm
     model = Comment
 
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return HttpResponseForbidden()
-        ThePost = Post.objects.get(pk=self.kwargs['pk'])
-        Yes = {'author': request.user,'Poster': ThePost}
-        form = UserCommentForm(initial = Yes)
-        form.save()
-        self.object = self.get_object()
         return super().post(request,*args,**kwargs)
     def get_success_url(self):
         return reverse('post-detail', kwargs={'pk': self.kwargs['pk']})
