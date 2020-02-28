@@ -23,6 +23,17 @@ class PostListView(ListView):
     ordering = ['-date_posted']
     paginate_by = 5
 
+    def get_queryset(self):
+        try:
+            a = self.request.GET.get('Post',)
+        except KeyError:
+            a = None
+        if a:
+            post_list = Post.objects.all().filter(title__icontains=a)
+        else:
+            post_list = Post.objects.all()
+        return post_list
+
 class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
