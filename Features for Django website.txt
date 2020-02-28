@@ -1,8 +1,0 @@
-- Commenting on posts 
-- Poll option to rate a movie from a post
-- Search for a movie
-- Add favorites movies to user profile 
-- Connect to movie database? 
-- Emote comments
-- Ability to like or dislike another comment or post
-- Ability to filter and follow another user.
