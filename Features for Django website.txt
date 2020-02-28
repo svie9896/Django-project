@@ -1,4 +1,0 @@
-- Poll option within a post
-- Emote comments
-- Ability to like or dislike another comment or post
-- Ability to filter and follow another user.
