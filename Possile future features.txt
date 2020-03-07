@@ -1,4 +1,10 @@
 - Poll option within a post
 - Emote comments
 - Ability to like or dislike another comment or post
-- Ability to filter and follow another user.
+- Ability to follower another user and have a followers tab. 
+
+https://stackoverflow.com/questions/6218175/how-to-implement-followers-following-in-django
+https://stackoverflow.com/questions/866272/how-can-i-build-multiple-submit-buttons-django-form
+https://stackoverflow.com/questions/21267752/django-multiple-forms-possible-when-using-formview
+https://stackoverflow.com/questions/16554335/best-method-to-store-list-of-foreign-keys-in-a-model
+https://docs.djangoproject.com/en/3.0/topics/db/examples/many_to_many/

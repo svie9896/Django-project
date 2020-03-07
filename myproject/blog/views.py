@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from .models import Post, Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
@@ -83,6 +83,8 @@ class PostDetail(View):
         view = PostDisplayView.as_view()
         return view(request,*args,**kwargs)
     def post(self,request,*args,**kwargs):
+        if 'follow' in request.POST:
+            return redirect('register')
         view = CommentForm.as_view()
         return view(request,*args,**kwargs)
 
